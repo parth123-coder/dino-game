@@ -77,32 +77,8 @@ body {
     left: 80px;
     width: 60px;
     height: 80px;
-    background: #228B22;
-    border-radius: 20px 20px 10px 10px;
     z-index: 3;
     transition: bottom 0.3s ease;
-}
-
-#dino::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    width: 30px;
-    height: 25px;
-    background: #32CD32;
-    border-radius: 15px;
-}
-
-#dino::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 10px;
-    width: 40px;
-    height: 20px;
-    background: #228B22;
-    border-radius: 10px;
 }
 
 .running {
@@ -351,8 +327,15 @@ body {
 
 /* Animations */
 @keyframes dinoRun {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    0% { 
+        transform: translateY(0px) scaleY(1); 
+    }
+    50% { 
+        transform: translateY(-5px) scaleY(0.95); 
+    }
+    100% { 
+        transform: translateY(0px) scaleY(1); 
+    }
 }
 
 @keyframes moveBackground {
