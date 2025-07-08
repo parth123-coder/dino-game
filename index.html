@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Dino Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Background layers for parallax effect -->
+        <div id="background">
+            <div class="bg-layer" id="mountains"></div>
+            <div class="bg-layer" id="clouds"></div>
+            <div class="bg-layer" id="ground"></div>
+        </div>
+
+        <!-- Game elements -->
+        <div id="gameArea">
+            <!-- Dinosaur -->
+            <div id="dino" class="running"></div>
+            
+            <!-- Obstacles container -->
+            <div id="obstaclesContainer"></div>
+            
+            <!-- Asteroid (hidden by default) -->
+            <div id="asteroid" class="hidden"></div>
+        </div>
+
+        <!-- UI Elements -->
+        <div id="ui">
+            <div id="score">Score: 0</div>
+            <div id="level">Level: Easy</div>
+        </div>
+
+        <!-- Math Problem Container -->
+        <div id="mathContainer" class="hidden">
+            <div id="mathProblem"></div>
+            <div id="mathInputContainer">
+                <input type="number" id="mathInput" placeholder="Enter answer">
+                <button id="submitAnswer">Submit</button>
+            </div>
+            <div id="mathTimer">Time: 5s</div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="hidden">
+            <h2>Game Over!</h2>
+            <p id="finalScore">Final Score: 0</p>
+            <button id="restartButton">Restart Game</button>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen">
+            <h1>Math Dino Runner</h1>
+            <p>Jump over cactuses and solve math problems!</p>
+            <p>Press SPACE or CLICK to jump</p>
+            <button id="startButton">Start Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

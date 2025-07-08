@@ -1,0 +1,416 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #F4A460 70%, #DEB887 100%);
+    height: 100vh;
+}
+
+/* Game Container */
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Background layers for parallax */
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bg-layer {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat-x;
+}
+
+#mountains {
+    top: 0;
+    background: linear-gradient(to bottom, #8B4513 60%, #CD853F 100%);
+    clip-path: polygon(0 80%, 10% 60%, 20% 70%, 30% 50%, 40% 65%, 50% 45%, 60% 60%, 70% 40%, 80% 55%, 90% 35%, 100% 50%, 100% 100%, 0 100%);
+    animation: moveBackground 20s linear infinite;
+}
+
+#clouds {
+    top: 10%;
+    height: 30%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, #FFD700 50px, transparent 51px);
+    animation: moveBackground 40s linear infinite;
+}
+
+#ground {
+    bottom: 0;
+    height: 150px;
+    background: #DEB887;
+    border-top: 3px solid #CD853F;
+    animation: moveBackground 2s linear infinite;
+}
+
+/* Game Area */
+#gameArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Dinosaur */
+#dino {
+    position: absolute;
+    bottom: 150px;
+    left: 80px;
+    width: 60px;
+    height: 80px;
+    background: #228B22;
+    border-radius: 20px 20px 10px 10px;
+    z-index: 3;
+    transition: bottom 0.3s ease;
+}
+
+#dino::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 30px;
+    height: 25px;
+    background: #32CD32;
+    border-radius: 15px;
+}
+
+#dino::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+    width: 40px;
+    height: 20px;
+    background: #228B22;
+    border-radius: 10px;
+}
+
+.running {
+    animation: dinoRun 0.4s infinite;
+}
+
+.jumping {
+    bottom: 250px !important;
+    transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.dino.frozen {
+    animation: none;
+    /* Ensure the dino stays exactly where it was at collision */
+    animation-play-state: paused;
+}
+
+/* Cactus */
+.cactus {
+    position: absolute;
+    bottom: 150px;
+    width: 30px;
+    height: 60px;
+    background: #006400;
+    border-radius: 15px;
+    animation: moveObstacle 3s linear infinite;
+}
+
+.cactus::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    width: 20px;
+    height: 30px;
+    background: #006400;
+    border-radius: 10px;
+}
+
+.cactus::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: -15px;
+    width: 20px;
+    height: 35px;
+    background: #006400;
+    border-radius: 10px;
+}
+
+/* Math Cactus */
+.math-cactus {
+    position: absolute;
+    bottom: 150px;
+    width: 50px;
+    height: 100px;
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+    border-radius: 25px;
+    border: 3px solid #FFD700;
+    animation: mathCactusGlow 1s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.math-cactus::before {
+    content: '?';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFD700;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Asteroid */
+#asteroid {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #8B4513 30%, #A0522D 70%);
+    border-radius: 50%;
+    z-index: 4;
+}
+
+.asteroid-falling {
+    animation: asteroidFall 1s ease-in forwards;
+}
+
+/* UI Elements */
+#ui {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+    color: #333;
+    font-weight: bold;
+}
+
+#score, #level {
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Math Container */
+#mathContainer {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px solid #4CAF50;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 6;
+    min-width: 300px;
+}
+
+#mathProblem {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#mathInputContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#mathInput {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 120px;
+    text-align: center;
+}
+
+#mathInput:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+#submitAnswer {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#submitAnswer:hover {
+    background: #45a049;
+}
+
+#mathTimer {
+    color: #666;
+    font-weight: bold;
+}
+
+/* Game Over Screen */
+#gameOverScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 7;
+}
+
+#gameOverScreen h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ff4444;
+}
+
+#finalScore {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+#restartButton, #startButton {
+    padding: 15px 30px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#restartButton:hover, #startButton:hover {
+    background: #45a049;
+}
+
+/* Start Screen */
+#startScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 7;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+#startScreen h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#startScreen p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes dinoRun {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes moveBackground {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes moveObstacle {
+    from { 
+        right: -50px; 
+        transform: translateX(0);
+    }
+    to { 
+        right: 100vw; 
+        transform: translateX(100px);
+    }
+}
+
+@keyframes mathCactusGlow {
+    from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    to { box-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.6); }
+}
+
+@keyframes asteroidFall {
+    from {
+        top: -100px;
+        transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+        top: calc(100vh - 150px);
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #dino {
+        left: 50px;
+        width: 50px;
+        height: 70px;
+    }
+    
+    #mathContainer {
+        min-width: 250px;
+        padding: 15px;
+    }
+    
+    #mathProblem {
+        font-size: 20px;
+    }
+    
+    #mathInput {
+        width: 100px;
+        font-size: 14px;
+    }
+    
+    #submitAnswer {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
